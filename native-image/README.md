@@ -19,7 +19,7 @@ Expected output should be
 ```xml
 <freemarker-graalvm-sample>
 <freemarker-version>2.3.35-nightly</freemarker-version>
-<description>FreeMarkerGraalVMSample</description>
+<description>FreeMarkerGraalVMMavenSample</description>
 </freemarker-graalvm-sample>
 ```
 
@@ -29,14 +29,14 @@ Here is a sample usage guide for ApacheFreeMarker + GraalVM.
 
 To run the sample in classic Just In Time Way, we only need :
 
-* FreeMarkerGraalVMSample.java
+* FreeMarkerGraalVMMavenSample.java
 * sample.ftl
 
 But for the Ahead Of Time application with GraalVM some additional configuration is required : 
 
 * custom-reflect-config.json
 
-### FreeMarkerGraalVMSample.java sample class
+### FreeMarkerGraalVMMavenSample.java sample class
 
 ```java
 import freemarker.log.Logger;
@@ -50,9 +50,9 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FreeMarkerGraalVMSample {
+public class FreeMarkerGraalVMMavenSample {
 
-    private final static Logger LOG = Logger.getLogger(FreeMarkerGraalVMSample.class.getName());
+    private final static Logger LOG = Logger.getLogger(FreeMarkerGraalVMMavenSample.class.getName());
 
     /* data model */
     public class Data {
@@ -67,7 +67,7 @@ public class FreeMarkerGraalVMSample {
 
     private void handleTemplate(Writer writer, String templatePath, Map<String, Object> dataModel) throws IOException, TemplateException {
         Configuration cfg = new Configuration( Configuration.VERSION_2_3_34 );
-        cfg.setClassForTemplateLoading( FreeMarkerGraalVMSample.class, "/templates" );
+        cfg.setClassForTemplateLoading( FreeMarkerGraalVMMavenSample.class, "/templates" );
         Template template = cfg.getTemplate( templatePath );
         template.process( dataModel, writer );
     }
@@ -76,7 +76,7 @@ public class FreeMarkerGraalVMSample {
         try ( StringWriter writer = new StringWriter() ) {
             Map<String, Object> dataModel = new HashMap<>();
             Data data = new Data();
-            data.setDescription( "FreeMarkerGraalVMSample" );
+            data.setDescription( "FreeMarkerGraalVMMavenSample" );
             dataModel.put("data", data);
             handleTemplate( writer, "sample.ftl", dataModel );
             LOG.info( writer.toString() );
@@ -86,7 +86,7 @@ public class FreeMarkerGraalVMSample {
     }
 
     public static void main(String[] args) {
-        FreeMarkerGraalVMSample sample = new FreeMarkerGraalVMSample();
+        FreeMarkerGraalVMMavenSample sample = new FreeMarkerGraalVMMavenSample();
         sample.runSample();
     }
 
@@ -108,7 +108,7 @@ Refers to [Reflection in Native Image](https://www.graalvm.org/jdk21/reference-m
 
 ```json
 [{
-  "name" : "FreeMarkerGraalVMSample$Data",
+  "name" : "FreeMarkerGraalVMMavenSample$Data",
   "methods" : [ {
     "name" : "<init>",
     "parameterTypes" : [ ]
@@ -129,7 +129,7 @@ export BASEDIR=.
 export CP=./lib/freemarker-gae-2.3.35-SNAPSHOT.jar:.
 
 # just in time application build
-javac -cp ${CP} -d build ./src/FreeMarkerGraalVMSample.java
+javac -cp ${CP} -d build ./src/FreeMarkerGraalVMMavenSample.java
 
 # ahead of time application build
 #
@@ -141,7 +141,7 @@ javac -cp ${CP} -d build ./src/FreeMarkerGraalVMSample.java
 native-image \
   -cp "${CP}:build" \
   -H:Path=build \
-  -H:Class=FreeMarkerGraalVMSample \
+  -H:Class=FreeMarkerGraalVMMavenSample \
   -H:IncludeResources=^templates/.* \
   -H:+UnlockExperimentalVMOptions \
   -H:ReflectionConfigurationFiles=./config/custom-reflect-config.json \
