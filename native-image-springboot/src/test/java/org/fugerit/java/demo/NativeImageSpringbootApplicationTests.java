@@ -1,4 +1,4 @@
-package org.fugerit.java.demo.native_image_springboot;
+package org.fugerit.java.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -9,7 +9,7 @@ mvn clean package -Dnative
 ## Run
 
 ```shell
-./build/freemarkergraalvmsample 
+./target/freemarkergraalvmsample 
 ```
 
 ```shell
