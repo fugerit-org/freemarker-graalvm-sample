@@ -9,3 +9,4 @@ GraalVM 21+
 1. [native-image](native-image/README.md)
 2. [native-image-maven](native-image-maven/README.md)
 3. [native-image-gradle](native-image-gradle/README.md)
+4. [native-image-quarkus](native-image-quarkus/README.md)
