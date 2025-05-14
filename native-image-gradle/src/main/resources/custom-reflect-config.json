@@ -1,0 +1,10 @@
+[{
+  "name" : "FreeMarkerGraalVMSample$Data",
+  "methods" : [ {
+    "name" : "<init>",
+    "parameterTypes" : [ ]
+  },{
+    "name" : "getDescription",
+    "parameterTypes" : [ ]
+  } ]
+}]

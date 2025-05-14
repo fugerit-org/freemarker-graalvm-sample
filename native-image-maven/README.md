@@ -1,4 +1,4 @@
-# FreeMarker GraalVM Sample native image
+# FreeMarker GraalVM Sample native image - Maven
 
 ## Build
 
