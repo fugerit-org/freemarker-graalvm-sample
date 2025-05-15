@@ -11,6 +11,10 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    freemarkerGaeVersion = '2.3.35-SNAPSHOT'
+}
+
 dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
@@ -20,6 +24,8 @@ dependencies {
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("io.micronaut:micronaut-http-server")
+    implementation files("../native-image/lib/freemarker-gae-${freemarkerGaeVersion}.jar")
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("io.micronaut.spring:micronaut-spring-web")
@@ -65,4 +71,16 @@ tasks.named("dockerfileNative") {
     jdkVersion = "21"
 }
 
-
+graalvmNative {
+    binaries {
+        main {
+            imageName = 'freemarkergraalvmsample'
+            def reflectConfigFile = file('src/main/resources/custom-reflect-config.json')
+            buildArgs.addAll([
+                    '-H:Name=freemarkergraalvmsample',
+                    '-H:IncludeResources=^templates/.*',
+                    "-H:ReflectionConfigurationFiles=${reflectConfigFile.absolutePath}"
+            ])
+        }
+    }
+}

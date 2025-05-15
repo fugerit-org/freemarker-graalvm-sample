@@ -111,7 +111,7 @@ Refers to [Reflection in Native Image](https://www.graalvm.org/jdk21/reference-m
 
 ```json
 [{
-  "name" : "FreeMarkerGraalVMMavenSample$Data",
+  "name" : "org.fugerit.java.demo.FreeMarkerController$Data",
   "methods" : [ {
     "name" : "<init>",
     "parameterTypes" : [ ]
