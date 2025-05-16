@@ -44,7 +44,7 @@ public class Main {
                 .start();
 
 
-        System.out.println("WEB server is up! http://localhost:" + server.port() + "/simple-greet");
+        System.out.println("WEB server is up! http://localhost:" + server.port() + "/freemarker");
 
     }
 
@@ -54,7 +54,6 @@ public class Main {
      */
     static void routing(HttpRouting.Builder routing) {
         routing
-               .register("/greet", new GreetService())
-               .get("/simple-greet", (req, res) -> res.send("Hello World!")); 
+               .register("/freemarker", new FreeMarkerService());
     }
 }

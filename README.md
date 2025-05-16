@@ -12,3 +12,4 @@ GraalVM 21+
 4. [native-image-quarkus](native-image-quarkus/README.md) (maven)
 5. [native-image-springboot](native-image-springboot/README.md) (gradle kotlin)
 6. [native-image-micronaut](native-image-micronaut/README.md) (gradle groovy)
+7. [native-image-helidon](native-image-helidon/README.md) (maven)

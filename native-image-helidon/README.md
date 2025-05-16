@@ -1,37 +1,17 @@
 # native-image-helidon
 
-
-
 ## Build and run
 
+With JDK21 JIT
 
-With JDK21
-```bash
+```shell
 mvn package
 java -jar target/native-image-helidon.jar
 ```
 
-## Exercise the application
+With JDK21 AOT
 
-Basic:
+```shell
+mvn clean package -Pnative-image
+java -jar target/native-image-helidon.jar
 ```
-curl -X GET http://localhost:8080/simple-greet
-Hello World!
-```
-
-
-JSON:
-```
-curl -X GET http://localhost:8080/greet
-{"message":"Hello World!"}
-
-curl -X GET http://localhost:8080/greet/Joe
-{"message":"Hello Joe!"}
-
-curl -X PUT -H "Content-Type: application/json" -d '{"greeting" : "Hola"}' http://localhost:8080/greet/greeting
-
-curl -X GET http://localhost:8080/greet/Jose
-{"message":"Hola Jose!"}
-```
-
-
